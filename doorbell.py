@@ -19,9 +19,10 @@ SSID_TOKEN = sys.argv[1] if len(sys.argv) > 1 else 'Free Public Wifi'
 DEVNULL = open(os.devnull, 'wb')
 def do_ring():
     """ Play the doorbell.wav file. Don't wait for it to finish. """
-    cmd = 'alsaplayer -o alsa --quiet ./doorbell.wav'
-    soundproc = subprocess.Popen(cmd.split(), close_fds=True,
-                                 stdin=DEVNULL, stdout=DEVNULL, stderr=DEVNULL)
+   # cmd = 'alsaplayer -o alsa --quiet ./doorbell.wav'
+   # soundproc = subprocess.Popen(cmd.split(), close_fds=True,
+#                                 stdin=DEVNULL, stdout=DEVNULL, stderr=DEVNULL)
+    subprocess.call('bash ./lights.sh >/dev/null', shell=True)
 
 cmd = 'tcpdump -l -K -q -i DoorbellMonitor -n -s 256'
 proc = subprocess.Popen(cmd.split(), close_fds=True,
